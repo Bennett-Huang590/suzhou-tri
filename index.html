@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2026苏州天平山红枫+古城银杏 3天2晚终审路书</title>
+  <style>
+    :root {
+      --glass-panel: rgba(255, 255, 255, 0.84);
+      --glass-inner: rgba(255, 255, 255, 0.68);
+      --glass-border: rgba(255, 255, 255, 0.72);
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --accent: #b91c1c;
+      --accent-soft: rgba(185, 28, 28, 0.12);
+      --accent-gold: #b45309;
+      --gold-soft: rgba(180, 83, 9, 0.12);
+      --accent-blue: #1d4ed8;
+      --blue-soft: rgba(29, 78, 216, 0.12);
+      --accent-green: #047857;
+      --green-soft: rgba(4, 120, 87, 0.12);
+      --shadow-lg: 0 10px 28px -4px rgba(15, 23, 42, 0.10), 0 4px 10px -2px rgba(15, 23, 42, 0.05);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-color: #f4ece8;
+    }
+
+    /* 隐藏表单状态控制器（display:none 彻底避免安卓 WebView 焦点恢复与输入法 IPC 死锁） */
+    .sr-input {
+      display: none;
+    }
+
+    label, button, a {
+      touch-action: manipulation;
+    }
+
+    /* 纯色主题外壳（零 GPU 大纹理渐变，防止微信浮窗截图花屏与显存死锁） */
+    .page-shell {
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 40px;
+      background-color: #f4ece8;
+    }
+
+    #th-blue:checked ~ .page-shell {
+      background-color: #e6effd;
+    }
+
+    #th-ginkgo:checked ~ .page-shell {
+      background-color: #fdf6db;
+    }
+
+    #th-maple:checked ~ .page-shell label[for="th-maple"],
+    #th-blue:checked ~ .page-shell label[for="th-blue"],
+    #th-ginkgo:checked ~ .page-shell label[for="th-ginkgo"] {
+      background: var(--text-main);
+      color: #fff;
+    }
+
+    .container {
+      position: relative;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 18px 16px;
+    }
+
+    /* 卡片容器基类（全局移除 backdrop-filter 模糊合成，根除微信浮窗花屏） */
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .glass-inner {
+      background: #f8fafc;
+      border: 1px solid rgba(15, 23, 42, 0.07);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    /* 顶部工具条与主题切换 */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(255, 255, 255, 0.88);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(185, 28, 28, 0.22);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .theme-switcher {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .theme-btn {
+      display: inline-block;
+      border: none;
+      background: transparent;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 主标题与手机端折叠总览控制 */
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .hero-header h1 {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .hero-subtitle {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+    }
+
+    .hero-toggle-btn {
+      display: none;
+      border: 1px solid rgba(15, 23, 42, 0.15);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* 四宫格核心凭证卡片 */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .kpi-box {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kpi-label {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .kpi-title {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .kpi-desc {
+      font-size: 12.5px;
+      color: var(--text-sub);
+      line-height: 1.45;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .badge-red { background: var(--accent-soft); color: var(--accent); }
+    .badge-gold { background: var(--gold-soft); color: var(--accent-gold); }
+    .badge-blue { background: var(--blue-soft); color: var(--accent-blue); }
+    .badge-green { background: var(--green-soft); color: var(--accent-green); }
+
+    /* 气象实况横幅 */
+    .weather-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .weather-day {
+      background: rgba(255, 255, 255, 0.78);
+      border-radius: 12px;
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .weather-day.warn { border-left-color: var(--accent); }
+    .weather-day.sun { border-left-color: var(--accent-gold); }
+
+    .w-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 3px;
+      gap: 6px;
+    }
+
+    .w-detail {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.45;
+    }
+
+    /* 主导航栏（全平台标准文档流，零 sticky/fixed 与零模糊合成） */
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 6px;
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+    }
+
+    .tab-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-sub);
+      text-decoration: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 42px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .tab-btn .tab-icon { font-size: 16px; line-height: 1; }
+    .tab-btn .tab-short { display: none; }
+
+    .tab-btn:hover { background: rgba(15, 23, 42, 0.04); }
+
+    /* 纯 CSS Radio Tab 切换（不依赖 JS，兼容微信无脚本/弱脚本浏览） */
+    .tab-panel {
+      display: none;
+    }
+
+    #r-itinerary:checked ~ #tab-itinerary,
+    #r-camera:checked ~ #tab-camera,
+    #r-bag:checked ~ #tab-bag,
+    #r-budget:checked ~ #tab-budget,
+    #r-map:checked ~ #tab-map {
+      display: block;
+    }
+
+    #r-itinerary:checked ~ .nav-tabs label[for="r-itinerary"],
+    #r-camera:checked ~ .nav-tabs label[for="r-camera"],
+    #r-bag:checked ~ .nav-tabs label[for="r-bag"],
+    #r-budget:checked ~ .nav-tabs label[for="r-budget"],
+    #r-map:checked ~ .nav-tabs label[for="r-map"] {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .js-only { display: none; }
+    html.js-enabled .js-only { display: inline-flex; }
+    html.js-enabled .progress-bar-wrap.js-only { display: block; }
+
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 8px 10px;
+      line-height: 1.5;
+    }
+
+    /* 每日筛选子按钮（纯 CSS Radio 控制） */
+    .day-filter {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .filter-pill {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(15, 23, 42, 0.16);
+      background: rgba(255, 255, 255, 0.8);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      transition: all 0.2s;
+      min-height: 36px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #r-day-all:checked ~ .day-filter label[for="r-day-all"],
+    #r-day-d0:checked ~ .day-filter label[for="r-day-d0"],
+    #r-day-d1:checked ~ .day-filter label[for="r-day-d1"],
+    #r-day-d2:checked ~ .day-filter label[for="r-day-d2"] {
+      background: var(--text-main);
+      color: #fff;
+      border-color: var(--text-main);
+    }
+
+    /* 时间轴样式 */
+    .timeline-group {
+      display: none;
+      margin-bottom: 22px;
+    }
+
+    #r-day-all:checked ~ .timeline-group,
+    #r-day-d0:checked ~ #group-d0,
+    #r-day-d1:checked ~ #group-d1,
+    #r-day-d2:checked ~ #group-d2 {
+      display: block;
+    }
+
+    .day-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 15px;
+      background-color: #b91c1c;
+      color: #fff;
+      border-radius: 12px;
+      margin-bottom: 14px;
+    }
+
+    .day-banner.blue { background-color: #1e40af; }
+    .day-banner.green { background-color: #065f46; }
+
+    .day-banner h3 { font-size: 15.5px; font-weight: 800; line-height: 1.35; }
+    .day-banner span {
+      font-size: 12px;
+      background: rgba(255, 255, 255, 0.22);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .tl-list {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px dashed rgba(15, 23, 42, 0.22);
+      margin-left: 8px;
+    }
+
+    .tl-item { position: relative; margin-bottom: 12px; }
+
+    .tl-dot {
+      position: absolute;
+      left: -27px;
+      top: 15px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+    }
+
+    .tl-time {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tl-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .tl-body { font-size: 13.5px; color: var(--text-sub); }
+    .tl-body ul { padding-left: 18px; margin-top: 4px; }
+    .tl-body li { margin-bottom: 5px; }
+
+    code {
+      background: rgba(15, 23, 42, 0.07);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-family: "SF Mono", Consolas, monospace;
+      font-size: 0.92em;
+      color: #991b1b;
+    }
+
+    /* 摄影参数交互速查器 */
+    .scene-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .scene-card {
+      display: block;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: left;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #r-cam-0:checked ~ .scene-selector label[for="r-cam-0"],
+    #r-cam-1:checked ~ .scene-selector label[for="r-cam-1"],
+    #r-cam-2:checked ~ .scene-selector label[for="r-cam-2"],
+    #r-cam-3:checked ~ .scene-selector label[for="r-cam-3"],
+    #r-cam-4:checked ~ .scene-selector label[for="r-cam-4"] {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.14);
+    }
+
+    .scene-name { font-size: 13.5px; font-weight: 800; color: var(--text-main); margin-bottom: 2px; }
+    .scene-sub { font-size: 12px; color: var(--text-muted); }
+
+    .cam-display {
+      display: none;
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    #r-cam-0:checked ~ #cam-0,
+    #r-cam-1:checked ~ #cam-1,
+    #r-cam-2:checked ~ #cam-2,
+    #r-cam-3:checked ~ #cam-3,
+    #r-cam-4:checked ~ #cam-4 {
+      display: block;
+    }
+
+    .cam-display code {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fde68a;
+    }
+
+    .cam-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cam-params {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .param-cell {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .param-k { font-size: 12px; color: #94a3b8; margin-bottom: 2px; }
+    .param-v { font-size: 15.5px; font-weight: 800; color: #38bdf8; font-family: "SF Mono", Consolas, monospace; }
+    .param-v.amber { color: #fbbf24; }
+    .param-v.rose { color: #fb7185; }
+    .param-v.emerald { color: #34d399; }
+
+    .cam-rule {
+      background: rgba(255, 255, 255, 0.06);
+      border-left: 3px solid #fbbf24;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #e2e8f0;
+    }
+
+    /* 响应式表格 */
+    .table-wrap {
+      border-radius: 12px;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    th, td {
+      padding: 11px 14px;
+      text-align: left;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.06);
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    /* 蒲公英背包分仓 */
+    .bag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .bag-zone { border-top: 4px solid var(--accent); }
+    .bag-zone.z2 { border-top-color: var(--accent-blue); }
+    .bag-zone.z3 { border-top-color: var(--accent-gold); }
+    .bag-zone.z4 { border-top-color: var(--accent-green); }
+
+    /* Checklist */
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      margin-bottom: 8px;
+      cursor: pointer;
+      min-height: 48px;
+    }
+
+    .ck-input:checked + .check-item {
+      opacity: 0.65;
+      background: rgba(209, 250, 229, 0.55);
+    }
+
+    .ck-input:checked + .check-item .check-text { text-decoration: line-through; }
+
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #fff;
+    }
+
+    .ck-input:checked + .check-item .check-box {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .ck-input:checked + .check-item .check-box::after {
+      content: '✓';
+    }
+
+    .progress-bar-wrap {
+      height: 10px;
+      background: rgba(15, 23, 42, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 14px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: #059669;
+      width: 0%;
+    }
+
+    .copy-btn {
+      border: 1px solid rgba(15, 23, 42, 0.2);
+      background: #fff;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .section-title {
+      font-size: 16.5px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* 手机端轨交站序速查卡片 */
+    .transit-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .nav-tabs-bottom { display: none; }
+
+    /* ============================================================
+       手机移动端专属深度适配 (≤ 768px)
+    ============================================================ */
+    @media (max-width: 768px) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .page-shell {
+        padding-bottom: 20px;
+      }
+
+      .container {
+        padding: 10px 10px;
+      }
+
+      /* 手机端纯色卡片（无模糊合成、无动画） */
+      .glass-card {
+        padding: 14px 12px;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        background: #ffffff;
+      }
+
+      .glass-inner {
+        padding: 11px 12px;
+        background: #f8fafc;
+      }
+
+      /* 顶部栏居中紧凑 */
+      .top-bar {
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+
+      .brand-tag {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+
+      .theme-btn {
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+
+      .hero-header h1 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+
+      .hero-subtitle {
+        font-size: 12.5px;
+        margin-bottom: 10px;
+      }
+
+      .hero-toggle-btn {
+        display: inline-block;
+      }
+
+      /* 纯 CSS Checkbox 折叠总览详情 */
+      #chk-hero:checked ~ .hero-details {
+        display: none;
+      }
+      #chk-hero:checked ~ .hero-top-row .lbl-collapse {
+        display: none;
+      }
+      #chk-hero:not(:checked) ~ .hero-top-row .lbl-expand {
+        display: none;
+      }
+
+      /* KPI 变成紧凑 2x2 双栏矩阵，手机一屏看完去返程和酒店 */
+      .kpi-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .kpi-title { font-size: 13.5px; }
+      .kpi-desc { font-size: 12px; }
+
+      /* 天气改单列紧凑排列 */
+      .weather-strip {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      /* 彻底取消 position: fixed，改为文流内上下双栏导航（零悬浮遮挡、零微信浮窗触控死锁） */
+      .nav-tabs {
+        position: static;
+        display: flex;
+        margin: 0 0 12px 0;
+        border-radius: 12px;
+        padding: 5px 4px;
+        gap: 3px;
+        background: #ffffff;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+      }
+
+      .nav-tabs-bottom {
+        display: flex;
+        margin: 12px 0 10px 0;
+      }
+
+      .tab-btn {
+        flex-direction: column;
+        padding: 5px 2px;
+        gap: 2px;
+        border-radius: 10px;
+        min-height: 48px;
+      }
+
+      .tab-btn .tab-icon { font-size: 18px; }
+      .tab-btn .tab-long { display: none; }
+      .tab-btn .tab-short { display: block; font-size: 12px; line-height: 1.1; }
+      #r-itinerary:checked ~ .nav-tabs label[for="r-itinerary"],
+      #r-camera:checked ~ .nav-tabs label[for="r-camera"],
+      #r-bag:checked ~ .nav-tabs label[for="r-bag"],
+      #r-budget:checked ~ .nav-tabs label[for="r-budget"],
+      #r-map:checked ~ .nav-tabs label[for="r-map"] { box-shadow: none; }
+
+      /* 时间轴在手机端缩紧左边距，最大化正文阅读宽度 */
+      .tl-list {
+        padding-left: 14px;
+        margin-left: 4px;
+      }
+      .tl-dot {
+        left: -21px;
+        width: 10px;
+        height: 10px;
+      }
+
+      /* 场景参数卡片双列展示 */
+      .scene-selector {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .scene-card:last-child {
+        grid-column: span 2;
+      }
+
+      .cam-params {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .cam-params .param-cell:last-child {
+        grid-column: span 2;
+      }
+
+      /* 手机端表格彻底转为竖向卡片，消灭横向滚动条！ */
+      .table-wrap {
+        border: none;
+        background: transparent;
+      }
+      table.resp-table,
+      table.resp-table thead,
+      table.resp-table tbody,
+      table.resp-table tr,
+      table.resp-table td {
+        display: block;
+        width: 100%;
+      }
+      table.resp-table {
+        background: transparent;
+      }
+      table.resp-table thead {
+        display: none;
+      }
+      table.resp-table tbody tr {
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        border-radius: 12px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+      }
+      table.resp-table tbody td {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 6px 0;
+        border-bottom: 1px dashed rgba(15, 23, 42, 0.08);
+        text-align: right;
+      }
+      table.resp-table tbody td:last-child {
+        border-bottom: none;
+      }
+      table.resp-table tbody td::before {
+        content: attr(data-label);
+        font-weight: 700;
+        color: var(--text-muted);
+        text-align: left;
+        flex-shrink: 0;
+        font-size: 12.5px;
+      }
+      table.resp-table tbody td.td-block {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <input class="sr-input" type="radio" name="theme" id="th-maple" checked="checked" />
+  <input class="sr-input" type="radio" name="theme" id="th-blue" />
+  <input class="sr-input" type="radio" name="theme" id="th-ginkgo" />
+
+  <div class="page-shell">
+  <div class="container">
+    <input class="sr-input" type="radio" name="main-tab" id="r-itinerary" checked="checked" />
+    <input class="sr-input" type="radio" name="main-tab" id="r-camera" />
+    <input class="sr-input" type="radio" name="main-tab" id="r-bag" />
+    <input class="sr-input" type="radio" name="main-tab" id="r-budget" />
+    <input class="sr-input" type="radio" name="main-tab" id="r-map" />
+
+    <!-- 顶部栏 -->
+    <div class="top-bar">
+      <div class="brand-tag">
+        <span>🍁 姑苏烟雨 · 11.13—11.15</span>
+      </div>
+      <div class="theme-switcher">
+        <label class="theme-btn" for="th-maple">🍁 丹枫</label>
+        <label class="theme-btn" for="th-blue">🌧️ 蓝调</label>
+        <label class="theme-btn" for="th-ginkgo">🍂 银杏</label>
+      </div>
+    </div>
+
+    <!-- 全局总览卡 -->
+    <div class="glass-card hero-header">
+      <input class="sr-input" type="checkbox" id="chk-hero" />
+      <div class="hero-top-row">
+        <div>
+          <h1>苏州天平山红枫+古城银杏 3天2晚</h1>
+          <p class="hero-subtitle">
+            金华南同站往返 · 蒲公英单包轻装 · Nikon Z50 II 精准校准
+          </p>
+        </div>
+        <label class="hero-toggle-btn" for="chk-hero">
+          <span class="lbl-collapse">收起凭证 ▲</span>
+          <span class="lbl-expand">展开凭证 ▼</span>
+        </label>
+      </div>
+
+      <div class="hero-details" id="heroDetails">
+        <!-- 核心锁单四要素 -->
+        <div class="kpi-grid">
+          <div class="glass-inner kpi-box">
+            <div>
+              <div class="kpi-label">
+                <span style="color:var(--accent);">🚄 去程已出</span>
+                <span class="badge badge-red">05车02D</span>
+              </div>
+              <div class="kpi-title">G7310 · 16:50➔19:36</div>
+            </div>
+            <div class="kpi-desc">金华南➔<strong>苏州站</strong>（买长至无锡 ¥234.5）</div>
+          </div>
+
+          <div class="glass-inner kpi-box">
+            <div>
+              <div class="kpi-label">
+                <span style="color:var(--accent-blue);">🚄 返程已出</span>
+                <span class="badge badge-blue">¥204.5</span>
+              </div>
+              <div class="kpi-title">G1227 · 18:25➔20:44</div>
+            </div>
+            <div class="kpi-desc"><strong>苏州北</strong>➔金华南（17:20到站留65分）</div>
+          </div>
+
+          <div class="glass-inner kpi-box">
+            <div>
+              <div class="kpi-label">
+                <span style="color:var(--accent-gold);">🏨 住宿已订</span>
+                <button type="button" class="copy-btn js-only" data-copy="苏州市姑苏区苏站路1455号锦江之星苏州火车站北广场店">复制</button>
+              </div>
+              <div class="kpi-title">锦江之星北广场店</div>
+            </div>
+            <div class="kpi-desc">出站走<strong>319m</strong> · 有窗大床含早 · ¥358/2晚</div>
+          </div>
+
+          <div class="glass-inner kpi-box">
+            <div>
+              <div class="kpi-label">
+                <span style="color:var(--accent-green);">🎒 单包总计</span>
+                <span class="badge badge-green">无箱子</span>
+              </div>
+              <div class="kpi-title">¥1161 ~ ¥1296</div>
+            </div>
+            <div class="kpi-desc">蒲公英背包 · 周六减至2kg · 周日存前台</div>
+          </div>
+        </div>
+
+        <!-- 中国天气网 11/12 实时气象条 -->
+        <div class="weather-strip">
+          <div class="weather-day">
+            <div class="w-top">
+              <span>11/13 周五晚</span>
+              <span class="badge badge-blue">小雨 15~20℃</span>
+            </div>
+            <div class="w-detail">微风 1~2级 · 夜间山塘街河面与湿石板镜面反光极佳。</div>
+          </div>
+          <div class="weather-day warn">
+            <div class="w-top">
+              <span>11/14 周六</span>
+              <span class="badge badge-red">中雨转小雨 15~18℃</span>
+            </div>
+            <div class="w-detail"><strong>三天雨最大</strong> · 上午靠留园 700m 带顶长廊避雨，16:45 抢蓝调。</div>
+          </div>
+          <div class="weather-day sun">
+            <div class="w-top">
+              <span>11/15 周日</span>
+              <span class="badge badge-gold">白天小雨/夜多云 13~18℃</span>
+            </div>
+            <div class="w-detail">AQI 135 轻雾 · 白天仍在雨中（20点后多云），专攻漫射湿枫。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 主导航（纯 CSS Radio + Label 切换，桌面粘性顶栏 / 手机固定底栏） -->
+    <div class="nav-tabs" id="navTabs">
+      <label class="tab-btn" for="r-itinerary">
+        <span class="tab-icon">🗓️</span>
+        <span class="tab-long">逐小时路书</span>
+        <span class="tab-short">路书</span>
+      </label>
+      <label class="tab-btn" for="r-camera">
+        <span class="tab-icon">📷</span>
+        <span class="tab-long">Z50 II 实拍参数</span>
+        <span class="tab-short">参数</span>
+      </label>
+      <label class="tab-btn" for="r-bag">
+        <span class="tab-icon">🎒</span>
+        <span class="tab-long">蒲公英 &amp; 清单</span>
+        <span class="tab-short">背包</span>
+      </label>
+      <label class="tab-btn" for="r-budget">
+        <span class="tab-icon">💰</span>
+        <span class="tab-long">预算 &amp; 伴手礼</span>
+        <span class="tab-short">账单</span>
+      </label>
+      <label class="tab-btn" for="r-map">
+        <span class="tab-icon">🗺️</span>
+        <span class="tab-long">顺时针动线图</span>
+        <span class="tab-short">路线</span>
+      </label>
+    </div>
+
+    <!-- ==================== TAB 1: 逐小时执行路书 ==================== -->
+    <div class="tab-panel" id="tab-itinerary">
+      <div class="glass-card">
+        <input class="sr-input" type="radio" name="day-tab" id="r-day-all" checked="checked" />
+        <input class="sr-input" type="radio" name="day-tab" id="r-day-d0" />
+        <input class="sr-input" type="radio" name="day-tab" id="r-day-d1" />
+        <input class="sr-input" type="radio" name="day-tab" id="r-day-d2" />
+
+        <div class="day-filter">
+          <label class="filter-pill" for="r-day-all">全部 3 天</label>
+          <label class="filter-pill" for="r-day-d0">Day 0 周五</label>
+          <label class="filter-pill" for="r-day-d1">Day 1 周六</label>
+          <label class="filter-pill" for="r-day-d2">Day 2 周日</label>
+        </div>
+
+        <!-- DAY 0 -->
+        <div class="timeline-group" id="group-d0">
+          <div class="day-banner">
+            <h3>【Day 0 · 11/13 周五晚】秒级入住 ➔ 2小时山塘街镜面夜色</h3>
+            <span>小雨 15~20℃</span>
+          </div>
+          <div class="tl-list">
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">15:30 — 19:36 <span class="badge badge-red">G7310</span></div>
+              <div class="tl-title">金华南出发 ➔ 19:36 准点抵【苏州站】</div>
+              <div class="tl-body">
+                <ul>
+                  <li>安检红线：随身液体喷雾必须 <strong>≤100ml</strong>；</li>
+                  <li>19:36 停靠【苏州站】，直接刷身份证出闸（买长至无锡合规）。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">19:42 — 19:55 <span class="badge badge-green">步行 319 米</span></div>
+              <div class="tl-title">锦江之星北广场店（苏站路1455号）快速卸包</div>
+              <div class="tl-body">
+                <ul>
+                  <li>出北广场步行 5 分钟即达；</li>
+                  <li>将换洗衣物与 <code>50-250mm VR</code> 留房内，仅挂 <code>35mm f/1.7</code> 出门。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">20:00 — 22:00 <span class="badge badge-gold">重头戏 2 小时</span></div>
+              <div class="tl-title">2号线 2站（4分钟）直达【山塘街站】夜拍 + 晚餐</div>
+              <div class="tl-body">
+                <ul>
+                  <li><strong>机位</strong>：通贵桥低机位拍湿石板与河面红灯笼倒影（<code>f/1.8~2.0, 1/40~1/60s, ISO 1600</code>）；</li>
+                  <li><strong>晚餐</strong>：外围 <strong>【潘记藏书羊肉】</strong>（羊汤+白切 45元）或 <strong>【朱鸿兴/同德兴】</strong> 焖肉面（25元）；</li>
+                  <li>22:05 乘 2 号线 2 站回酒店休息。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY 1 -->
+        <div class="timeline-group" id="group-d1">
+          <div class="day-banner blue">
+            <h3>【Day 1 · 11/14 周六】留园700m长廊 ➔ 顺时针漫游 ➔ 16:45 蓝调</h3>
+            <span>中雨转小雨 15~18℃</span>
+          </div>
+          <div class="tl-list">
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">08:30 — 09:10 <span class="badge badge-green">金卡早饭</span></div>
+              <div class="tl-title">酒店免费热早餐 + 蒲公英包拉出防雨罩</div>
+              <div class="tl-body">
+                <code>50-250mm</code> 锁酒店，全天仅背 <code>Z50 II + 16-50 + 35/1.7 + 伞 + 充电宝</code>（仅重 2kg）。
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">09:15 — 12:00 <span class="badge badge-blue">城西避雨主力</span></div>
+              <div class="tl-title">【留园】（主力 55元）或 【艺圃】（茶室备选 10元）</div>
+              <div class="tl-body">
+                <ul>
+                  <li><strong>主力【留园】（34.5亩）</strong>：2号线直达石路站。700 米带顶长廊全覆盖，中雨天不打伞拍漏窗与太湖石；</li>
+                  <li><strong>色温校准</strong>：6500K 阴雨环境下白平衡设 <strong><code>6000K~6500K</code>（阴天预设/AWB）</strong> 中性还原白墙（设 5200K 会发青）。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">12:15 — 13:30 <span class="badge badge-gold">城中不绕路</span></div>
+              <div class="tl-title">观前街 / 临顿路午餐（砍掉十全街南绕）</div>
+              <div class="tl-body">
+                临顿路 <strong>【哑巴生煎】</strong>（06:30—19:30，约25元；⚠️ <strong>周末午市常排15~25分且拼桌较挤</strong>）；雨天怕等位或想宽敞单吃，直接去观前街 <strong>【裕兴记 / 同德兴 / 协和菜馆】</strong>（响油鳝糊 68元 或 双浇面 45元）。
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">13:50 — 16:15 <span class="badge badge-blue">城北免约室内</span></div>
+              <div class="tl-title">【苏州丝绸博物馆】（4号线北寺塔站4口出）或苏博</div>
+              <div class="tl-body">
+                09:00—17:00（<strong>16:00 停止入馆，务必 15:30 前进馆</strong>），刷身份证免约进馆，拍摄纯白旋转楼梯与天窗漫射光影。
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">16:30 — 17:25 <span class="badge badge-red">蓝调死命令</span></div>
+              <div class="tl-title">【平江路】真实蓝调 + 平江路28号买纪念书签</div>
+              <div class="tl-body">
+                <ul>
+                  <li><strong>死守 16:45—17:25</strong>：17:00 日落，17:29 蒙影结束，17:30 后天彻底死黑！16:45 到青石桥头用 <code>35/1.7</code>（白平衡 <code>4800K</code>）抢拍；</li>
+                  <li>进 <strong>【苏博官方文创店（平江路28号）】</strong> 买金属镂空书签（38~58元）送朋友，塞入背包暗袋。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">17:30 — 20:35 <span class="badge badge-green">夜评弹 + 采芝斋</span></div>
+              <div class="tl-title">平江路【夜场评弹茶馆】听曲 ➔ 观前街买粽子糖 ➔ 4号线回站</div>
+              <div class="tl-body">
+                <ul>
+                  <li>⚠️ <strong>避坑替代</strong>：评弹博物馆 <code>17:00</code> 闭馆（<code>16:30</code> 止入），晚间改去平江路 <strong>夜间商业评弹茶馆</strong>（如琵琶语 / 翰尔园等，<strong>19:00 晚场 ¥38~80</strong>）；提前在点评/猫眼线上选中前无遮挡座（避开老宅木柱盲区，不信街口拉客）；</li>
+                  <li>观前街91号 <strong>【采芝斋】</strong> 买松仁粽子糖（25元）；4号线北上 4 分钟回酒店。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="timeline-group" id="group-d2">
+          <div class="day-banner green">
+            <h3>【Day 2 · 11/15 周日】天平山湿枫 ➔ 木渎羊肉 ➔ 茶歇返程</h3>
+            <span>白天小雨 13~18℃ · AQI 135</span>
+          </div>
+          <div class="tl-list">
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">07:20 — 07:55 <span class="badge badge-green">退房存前台</span></div>
+              <div class="tl-title">早餐 + 自泡冷泡茶 + 蒲公英包免费存酒店</div>
+              <div class="tl-body">
+                07:20—07:45 金卡热早饭与冷泡茶；07:45 退房将换洗衣物与伴手礼存酒店前台，带上 <code>50-250mm VR</code> 与相机轻装准时出发。
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">07:55 — 12:00 <span class="badge badge-red">卡点09:00门票</span></div>
+              <div class="tl-title">1号线木渎转红枫专线 ➔ 【天平山】平地湿枫精华线</div>
+              <div class="tl-body">
+                <ul>
+                  <li><strong>门禁卡点（无需退改已订 09:00—10:00 票）</strong>：<code>07:55</code> 出发坐 2 号线转 1 号线至【木渎站】5号口，换 4路/假日6号/周末免费红枫线，全程 <code>55~65分钟</code>，约 <strong><code>08:55—09:00</code></strong> 恰好首批入园，避开10点后团客高峰；</li>
+                  <li><strong>动线</strong>：<code>南门 ➔ 古枫林 ➔ 十景塘 ➔ 宛转桥 ➔ 白云池 ➔ 白云古刹</code>（AQI 135 轻雾不登顶）；</li>
+                  <li><strong>技巧</strong>：白天仍有小雨无阳光，利用雨水高饱和拍湿枫、十景塘用树冠倒影遮灰天；白平衡 <code>6500K~7000K</code> 暖化红叶；<code>50-250 VR</code> 拍静止飞檐 <code>1/125s</code>，拍风吹枫叶提至 <code>≥1/250s</code>。</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">12:15 — 13:20 <span class="badge badge-gold">木渎单客小馆</span></div>
+              <div class="tl-title">木渎地铁站 / 东街单客藏书羊肉（¥45 ~ ¥55）</div>
+              <div class="tl-body">
+                避开团客合菜大店（老庆泰大锅），也不用打车 10~15km 折返藏书镇；就近进 <strong>木渎地铁站周边 / 木渎东街单客小馆</strong>，点 <strong>“白/红汤羊肉面（或羊汤+米饭）+ 二两白切羊肉”</strong>，暖胃不浪费。
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">14:15 — 16:35 <span class="badge badge-blue">银杏 + 酱鸭 + 茶歇</span></div>
+              <div class="tl-title">道前街南侧拍半黄银杏 ➔ 书院巷杜三珍买小份 ➔ 茶室挑片</div>
+              <div class="tl-body">
+                道前街（<strong>姑胥桥至饮马桥南侧人行道与粉墙黛瓦公交站台</strong>，“落叶缓扫”保留区）长焦拍单株树冠或贴地拍湿落叶；步行 8 分钟至书院巷 <strong>【杜三珍】</strong> 买 <strong>二两或半斤</strong> 现切塑封酱鸭（35元，免发腻）；15:45—16:35 找茶室歇脚修图，不干等车站。
+              </div>
+            </div>
+
+            <div class="tl-item glass-inner">
+              <div class="tl-dot"></div>
+              <div class="tl-time">16:40 — 20:44 <span class="badge badge-red">G1227 到家</span></div>
+              <div class="tl-title">4号线取包 ➔ 2号线 18分钟抵【苏州北站】 ➔ 金华南</div>
+              <div class="tl-body">
+                16:40 乘 4 号线回苏州站取包，17:00 乘 2 号线直达苏州北站（<strong>17:20 到站，留足 65 分钟安全垫</strong>）；18:25 G1227 准时返抵金华南（20:44）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: Z50 II 实拍参数速查器 ==================== -->
+    <div class="tab-panel" id="tab-camera">
+      <div class="glass-card">
+        <input class="sr-input" type="radio" name="cam-tab" id="r-cam-0" checked="checked" />
+        <input class="sr-input" type="radio" name="cam-tab" id="r-cam-1" />
+        <input class="sr-input" type="radio" name="cam-tab" id="r-cam-2" />
+        <input class="sr-input" type="radio" name="cam-tab" id="r-cam-3" />
+        <input class="sr-input" type="radio" name="cam-tab" id="r-cam-4" />
+
+        <div class="section-title">📷 Nikon Z50 II 现场参数交互速查器</div>
+        <div class="scene-selector">
+          <label class="scene-card" for="r-cam-0">
+            <div class="scene-name">🏮 1. 山塘街雨夜</div>
+            <div class="scene-sub">周五 20-22点 · 微风</div>
+          </label>
+          <label class="scene-card" for="r-cam-1">
+            <div class="scene-name">🏯 2. 留园长廊</div>
+            <div class="scene-sub">周六上午 · 中雨漫射</div>
+          </label>
+          <label class="scene-card" for="r-cam-2">
+            <div class="scene-name">🌌 3. 平江路蓝调</div>
+            <div class="scene-sub">周六 16:45—17:25</div>
+          </label>
+          <label class="scene-card" for="r-cam-3">
+            <div class="scene-name">🍁 4. 天平山湿枫</div>
+            <div class="scene-sub">周日上午 · 轻雾小雨</div>
+          </label>
+          <label class="scene-card" for="r-cam-4">
+            <div class="scene-name">🍂 5. 道前街银杏</div>
+            <div class="scene-sub">周日下午 · 落叶局部</div>
+          </label>
+        </div>
+
+        <!-- 5 组纯 CSS 切换取景器参数面板 -->
+        <div class="cam-display" id="cam-0">
+          <div class="cam-top">
+            <span style="font-weight:800; font-size:15px;">🏮 山塘街镜面雨夜（通贵桥 / 新民桥）</span>
+            <span class="badge badge-red">周五 20:00—22:00</span>
+          </div>
+          <div class="cam-params">
+            <div class="param-cell"><div class="param-k">镜头选择</div><div class="param-v amber">35mm f/1.7</div></div>
+            <div class="param-cell"><div class="param-k">光圈</div><div class="param-v">f/1.8 ~ f/2.0</div></div>
+            <div class="param-cell"><div class="param-k">快门速度</div><div class="param-v emerald">1/40s ~ 1/60s</div></div>
+            <div class="param-cell"><div class="param-k">ISO &amp; 曝光补偿</div><div class="param-v rose">ISO 1600 (-0.3EV)</div></div>
+            <div class="param-cell"><div class="param-k">白平衡 (WB)</div><div class="param-v">4800K ~ 5200K</div></div>
+          </div>
+          <div class="cam-rule"><strong>构图铁律：</strong>雨水浸润让石板变成镜面反射。利用 Z50 II 翻转屏把机位压低至离地 20~30cm，将远处红灯笼暖光拉成金色长倒影。</div>
+        </div>
+
+        <div class="cam-display" id="cam-1">
+          <div class="cam-top">
+            <span style="font-weight:800; font-size:15px;">🏯 留园 700 米带顶长廊 / 艺圃延光阁听雨</span>
+            <span class="badge badge-blue">周六 09:15—12:00</span>
+          </div>
+          <div class="cam-params">
+            <div class="param-cell"><div class="param-k">镜头选择</div><div class="param-v amber">16-50mm VR / 35mm</div></div>
+            <div class="param-cell"><div class="param-k">光圈</div><div class="param-v">框景 f/5.6~f/8 | 特写 f/2.0</div></div>
+            <div class="param-cell"><div class="param-k">快门速度</div><div class="param-v emerald">1/80s ~ 1/125s (开VR)</div></div>
+            <div class="param-cell"><div class="param-k">ISO &amp; 曝光补偿</div><div class="param-v rose">ISO 400 ~ 800 (-0.3EV)</div></div>
+            <div class="param-cell"><div class="param-k">白平衡 (WB)</div><div class="param-v">6000K ~ 6500K (中性还原)</div></div>
+          </div>
+          <div class="cam-rule"><strong>色温与景深铁律：</strong>6500K 阴雨下必须设 <code>6000K~6500K</code>（阴天预设/AWB）才能让白墙中性还原（设 5200K 会发青）！人站暗长廊拍亮处冠云峰，收 f/5.6 保前后清晰。</div>
+        </div>
+
+        <div class="cam-display" id="cam-2">
+          <div class="cam-top">
+            <span style="font-weight:800; font-size:15px;">🌌 平江路青石桥真实蓝调（黄金 40 分钟）</span>
+            <span class="badge badge-blue">周六 16:45—17:25</span>
+          </div>
+          <div class="cam-params">
+            <div class="param-cell"><div class="param-k">镜头选择</div><div class="param-v amber">35mm f/1.7 (救命镜)</div></div>
+            <div class="param-cell"><div class="param-k">光圈</div><div class="param-v">f/1.7 ~ f/1.8</div></div>
+            <div class="param-cell"><div class="param-k">快门速度</div><div class="param-v emerald">1/50s</div></div>
+            <div class="param-cell"><div class="param-k">ISO &amp; 曝光补偿</div><div class="param-v rose">ISO 1600 ~ 2500 (-0.3EV)</div></div>
+            <div class="param-cell"><div class="param-k">白平衡 (WB)</div><div class="param-v">4500K ~ 5000K (强化冷蓝)</div></div>
+          </div>
+          <div class="cam-rule"><strong>天文死命令：</strong>11/14 日落 17:00，民用蒙影 17:29 结束，阴天 17:30 后彻底死黑！必须在 16:45—17:25 抢拍天空深蓝与红灯笼暖光 1:1 平衡瞬间。</div>
+        </div>
+
+        <div class="cam-display" id="cam-3">
+          <div class="cam-top">
+            <span style="font-weight:800; font-size:15px;">🍁 天平山十景塘 / 古枫林 / 白云古刹</span>
+            <span class="badge badge-gold">周日 09:00—12:00</span>
+          </div>
+          <div class="cam-params">
+            <div class="param-cell"><div class="param-k">镜头选择</div><div class="param-v amber">16-50 / 35 / 50-250 VR</div></div>
+            <div class="param-cell"><div class="param-k">光圈</div><div class="param-v">水池 f/5.6 | 林下 f/2.0</div></div>
+            <div class="param-cell"><div class="param-k">快门速度</div><div class="param-v emerald">静态 1/125s | 风吹叶 ≥1/250s</div></div>
+            <div class="param-cell"><div class="param-k">ISO &amp; 曝光补偿</div><div class="param-v rose">ISO 800 ~ 1600</div></div>
+            <div class="param-cell"><div class="param-k">白平衡 (WB)</div><div class="param-v">6500K ~ 7000K (暖化红枫)</div></div>
+          </div>
+          <div class="cam-rule"><strong>VR 与构图铁律：</strong>周日白天仍在微雨中且 AQI 135 远景有雾，不拍山顶远景！在背风谷底十景塘用高大五彩枫树冠填满水面倒影遮挡灰天；记住<strong>“VR只管手抖不管风抖”</strong>，风吹枝叶时快门提至 1/250s 以上。</div>
+        </div>
+
+        <div class="cam-display" id="cam-4">
+          <div class="cam-top">
+            <span style="font-weight:800; font-size:15px;">🍂 道前街半黄银杏局部 &amp; 湿石板落叶</span>
+            <span class="badge badge-gold">周日 14:15—15:40</span>
+          </div>
+          <div class="cam-params">
+            <div class="param-cell"><div class="param-k">镜头选择</div><div class="param-v amber">50-250mm VR / 35mm</div></div>
+            <div class="param-cell"><div class="param-k">光圈</div><div class="param-v">长焦 f/5.6 | 贴地 f/2.0</div></div>
+            <div class="param-cell"><div class="param-k">快门速度</div><div class="param-v emerald">1/200s ~ 1/320s (开VR)</div></div>
+            <div class="param-cell"><div class="param-k">ISO &amp; 曝光补偿</div><div class="param-v rose">ISO 800 ~ 1250</div></div>
+            <div class="param-cell"><div class="param-k">白平衡 (WB)</div><div class="param-v">6500K (暖调)</div></div>
+          </div>
+          <div class="cam-rule"><strong>物候防坑铁律：</strong>11月中旬银杏处于半黄半绿期，避开广角拍杂乱街景；用 50-250mm (100-200mm端) 截取已全黄的单株树冠与古典路灯，或用翻转屏贴地拍湿石板落叶（严禁下机动车道）。</div>
+        </div>
+
+        <div class="section-title">⚙️ 一机三镜防抖与物理边界表</div>
+        <div class="table-wrap">
+          <table class="resp-table">
+            <thead>
+              <tr>
+                <th>器材名称</th>
+                <th>防抖配置</th>
+                <th>重量</th>
+                <th>排期分工</th>
+                <th>实战防坑铁律</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="器材名称"><strong>Nikon Z50 II 机身</strong></td>
+                <td data-label="防抖配置">无 IBIS</td>
+                <td data-label="重量">405g</td>
+                <td data-label="排期分工">全程携带</td>
+                <td data-label="实战防坑铁律" class="td-block">曝光补偿常驻 <code>-0.3 EV</code> 保白墙；室内外 15℃➔20℃（55%RH 露点11℃）物理上不会结露。</td>
+              </tr>
+              <tr>
+                <td data-label="器材名称"><strong>Z DX 16-50mm VR</strong></td>
+                <td data-label="防抖配置"><strong>内置 4.5 档 VR</strong></td>
+                <td data-label="重量">135g</td>
+                <td data-label="排期分工">全程挂机</td>
+                <td data-label="实战防坑铁律" class="td-block">拍留园漏窗框景收至 <code>f/5.6~f/8</code>；沉筒无防水胶圈，雨天拍摄务必套塑料袋。</td>
+              </tr>
+              <tr>
+                <td data-label="器材名称"><strong>35mm f/1.7 定焦</strong></td>
+                <td data-label="防抖配置">无防抖（大光圈）</td>
+                <td data-label="重量">200g</td>
+                <td data-label="排期分工">全程主力</td>
+                <td data-label="实战防坑铁律" class="td-block">比套头大 3.7 档进光量！负责雨夜手持与天平山暗光湿叶，手持快门守住 <code>≥1/50s</code>。</td>
+              </tr>
+              <tr>
+                <td data-label="器材名称"><strong>Z DX 50-250mm VR</strong></td>
+                <td data-label="防抖配置"><strong>内置 5.0 档 VR</strong></td>
+                <td data-label="重量">405g</td>
+                <td data-label="排期分工">周六锁酒店 / 周日带出</td>
+                <td data-label="实战防坑铁律" class="td-block"><strong>VR 只管手抖，不管风抖！</strong>拍古刹飞檐、树干静态局部 <code>1/125s</code> 稳拍；拍风吹枫叶或水波需 <code>≥1/250s</code>。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: 蒲公英分仓 & 清单 ==================== -->
+    <div class="tab-panel" id="tab-bag">
+      <div class="glass-card">
+        <div class="section-title">🎒 蒲公英（PGYTECH）单包分仓收纳方案</div>
+        <div class="bag-grid">
+          <div class="glass-inner bag-zone">
+            <div class="kpi-label" style="color:var(--accent);">【顶部生活仓 · 压缩区】</div>
+            <div class="tl-body">
+              <ul>
+                <li>换洗衣物（内衣裤×2、袜子×2、薄T恤×1，卷成圆柱）；</li>
+                <li>液体喷雾（<strong>瓶身标注必须 ≤100ml</strong>）；</li>
+                <li><em>周六全天留置酒店，立减包重。</em></li>
+              </ul>
+            </div>
+          </div>
+          <div class="glass-inner bag-zone z2">
+            <div class="kpi-label" style="color:var(--accent-blue);">【下部相机仓 · 魔术贴区】</div>
+            <div class="tl-body">
+              <ul>
+                <li>Z50 II + <code>16-50mm VR</code> + <code>35mm f/1.7</code>；</li>
+                <li><code>50-250mm VR</code>（周六锁酒店，周日装包）；</li>
+                <li>电池×2 + 充电线 + 擦镜纸×2包 + 套头防雨塑料袋。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="glass-inner bag-zone z3">
+            <div class="kpi-label" style="color:var(--accent-gold);">【左右侧袋 &amp; 外挂】</div>
+            <div class="tl-body">
+              <ul>
+                <li>左侧：抗风折叠伞；右侧：保温杯（冷泡茶）；</li>
+                <li>胸前快拆：Osmo Action 5 Pro；</li>
+                <li><strong>底部暗袋：原装防雨罩（周六中雨必拉出）</strong>。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="glass-inner bag-zone z4">
+            <div class="kpi-label" style="color:var(--accent-green);">【贴背防盗仓 &amp; 伴手礼】</div>
+            <div class="tl-body">
+              <ul>
+                <li>身份证原件 + 移动电源；</li>
+                <li>周六买好的苏博金属书签/香囊（扁平卡片状直接塞入）。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title" style="justify-content:space-between;">
+          <span>✅ 行前准备与门票清单</span>
+          <span class="js-only" style="font-size:13px; color:var(--accent-green);" id="checkProgressText">0 / 7 已完成</span>
+        </div>
+        <div class="progress-bar-wrap js-only">
+          <div class="progress-bar-fill" id="checkProgressBar"></div>
+        </div>
+
+        <div id="checklistContainer">
+          <input class="sr-input ck-input" type="checkbox" id="ck-0" />
+          <label class="check-item" for="ck-0">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>预约周日【天平山】门票（30元）</strong>：微信“苏州园林旅游”公众号，约 11/15 上午 09:00—10:00 场次（已订无需退改，07:55 出发恰好 09:00 首波入园）。
+            </div>
+          </label>
+          <input class="sr-input ck-input" type="checkbox" id="ck-1" />
+          <label class="check-item" for="ck-1">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>预约周六【留园】门票（55元）</strong>：同公众号约 11/14 上午场（700m长廊抗中雨；若去艺圃则现场扫码 10 元）。
+            </div>
+          </label>
+          <input class="sr-input ck-input" type="checkbox" id="ck-2" />
+          <label class="check-item" for="ck-2">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>严查喷雾容器 ≤100ml</strong>：金华南站安检红线，严禁 300ml 罐体。
+            </div>
+          </label>
+          <input class="sr-input ck-input" type="checkbox" id="ck-3" />
+          <label class="check-item" for="ck-3">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>检查蒲公英底部防雨罩 + 16-50 套头塑料袋</strong>：应对周六中雨与周日白天微雨。
+            </div>
+          </label>
+          <input class="sr-input ck-input" type="checkbox" id="ck-4" />
+          <label class="check-item" for="ck-4">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>穿防滑抓地运动鞋</strong>：雨后园林与天平山石阶青苔防滑刚需。
+            </div>
+          </label>
+          <input class="sr-input ck-input" type="checkbox" id="ck-5" />
+          <label class="check-item" for="ck-5">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>Z50 II 机身预设</strong>：开启 RAW+JPEG、曝光补偿 <code>-0.3 EV</code>、电池满电与存储卡清零。
+            </div>
+          </label>
+          <input class="sr-input ck-input" type="checkbox" id="ck-6" />
+          <label class="check-item" for="ck-6">
+            <div class="check-box"></div>
+            <div class="check-text">
+              <strong>身份证原件 + 冷泡茶分装包 + 保温杯</strong>：装入蒲公英贴背仓与侧袋。
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: 预算 & 伴手礼 ==================== -->
+    <div class="tab-panel" id="tab-budget">
+      <div class="glass-card">
+        <div class="section-title">💰 全行程真实预算终审表（单人实付闭环）</div>
+        <div class="table-wrap" style="margin-bottom:18px;">
+          <table class="resp-table">
+            <thead>
+              <tr>
+                <th>消费项目</th>
+                <th>金额（RMB）</th>
+                <th>状态</th>
+                <th>核算明细与说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="消费项目"><strong>去程高铁 G7310</strong></td>
+                <td data-label="金额"><strong>¥234.5</strong></td>
+                <td data-label="状态"><span class="badge badge-green">已出票</span></td>
+                <td data-label="明细" class="td-block">金华南 16:50 ➔ 苏州站 19:36（05车02D，买长至无锡合规占位）</td>
+              </tr>
+              <tr>
+                <td data-label="消费项目"><strong>返程高铁 G1227</strong></td>
+                <td data-label="金额"><strong>¥204.5</strong></td>
+                <td data-label="状态"><span class="badge badge-green">已出票</span></td>
+                <td data-label="明细" class="td-block">苏州北 18:25 ➔ 金华南 20:44（候补兑现，达成金华南同站往返闭环）</td>
+              </tr>
+              <tr>
+                <td data-label="消费项目"><strong>火车站住宿 (2晚)</strong></td>
+                <td data-label="金额"><strong>¥358.0</strong></td>
+                <td data-label="状态"><span class="badge badge-green">已锁定</span></td>
+                <td data-label="明细" class="td-block">锦江之星火车站北广场店 · 豪华有窗大床房（¥179/晚，含金卡每日早餐）</td>
+              </tr>
+              <tr>
+                <td data-label="消费项目"><strong>景区门票</strong></td>
+                <td data-label="金额"><strong>¥40 ~ ¥85</strong></td>
+                <td data-label="状态"><span class="badge badge-blue">待预约</span></td>
+                <td data-label="明细" class="td-block">天平山 30元 + 周六园林（留园 55元 或 艺圃 10元）+ 丝博/苏博 0元</td>
+              </tr>
+              <tr>
+                <td data-label="消费项目"><strong>市内公共交通</strong></td>
+                <td data-label="金额"><strong>约 ¥24</strong></td>
+                <td data-label="状态"><span class="badge badge-blue">刷码</span></td>
+                <td data-label="明细" class="td-block">地铁 1 / 2 / 4 号线刷码 + 天平山周末免费红枫接驳专线</td>
+              </tr>
+              <tr>
+                <td data-label="消费项目"><strong>地道餐饮 &amp; 茶歇</strong></td>
+                <td data-label="金额"><strong>¥200 ~ ¥260</strong></td>
+                <td data-label="状态"><span class="badge badge-gold">现付</span></td>
+                <td data-label="明细" class="td-block">周五山塘面/羊汤(35) + 周六午生煎/苏帮菜(45~65) + 平江路晚场评弹茶位(38~80) + 木渎单客羊肉(45~55) + 周日茶歇(25)</td>
+              </tr>
+              <tr>
+                <td data-label="消费项目"><strong>朋友纪念礼 &amp; 特产</strong></td>
+                <td data-label="金额"><strong>¥100 ~ ¥130</strong></td>
+                <td data-label="状态"><span class="badge badge-gold">分批买</span></td>
+                <td data-label="明细" class="td-block">苏博金属书签/香囊(45~55) + 采芝斋松仁粽子糖(25) + 杜三珍二两/半斤现切酱鸭(35)</td>
+              </tr>
+              <tr style="background:rgba(185,28,28,0.08); font-weight:800;">
+                <td data-label="全包总计"><strong>全包实付总计</strong></td>
+                <td data-label="汇总金额" style="color:var(--accent); font-size:16px;"><strong>¥1161 ~ ¥1296</strong></td>
+                <td data-label="状态"><span class="badge badge-red">100%自洽</span></td>
+                <td data-label="说明" class="td-block">含往返高铁 + 2晚有窗品牌连锁 + 每日早饭 + 正餐茶歇 + 门票 + 纪念礼特产</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-title">🎁 朋友纪念礼与老字号特产坐标（顺路拿走）</div>
+        <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));">
+          <div class="glass-inner">
+            <div class="kpi-label"><span class="badge badge-blue">周六 17:15 顺手买</span></div>
+            <div class="kpi-title">① 苏博官方文创店（平江路28号）</div>
+            <div class="kpi-desc">免预约直接进！挑一枚 <strong>金属镂空书签（38~58元）</strong> 或 <strong>苏绣香囊（45~65元）</strong> 送朋友，极薄塞包。</div>
+          </div>
+          <div class="glass-inner">
+            <div class="kpi-label"><span class="badge badge-gold">周六 20:00 顺手买</span></div>
+            <div class="kpi-title">② 采芝斋总店（观前街91号）</div>
+            <div class="kpi-desc">听完夜场评弹出来顺路买铁盒装 <strong>松仁粽子糖（约25元）</strong>，直接带回酒店放进包里。</div>
+          </div>
+          <div class="glass-inner">
+            <div class="kpi-label"><span class="badge badge-red">周日 15:45 临走买</span></div>
+            <div class="kpi-title">③ 杜三珍老字号（书院巷店）</div>
+            <div class="kpi-desc">拍完道前街银杏步行 8 分钟即达，买 <strong>二两或半斤现切塑封酱鸭/糟鹅（约35元）</strong>，免发腻直接上高铁。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: 顺时针动线图 & 手机极简站序 ==================== -->
+    <div class="tab-panel" id="tab-map">
+      <div class="glass-card">
+        <div class="section-title">🗺️ 轨交顺时针无折返路线（支持双指放大看图）</div>
+        <div class="glass-inner" style="padding:8px;">
+          <svg viewBox="0 0 860 460" style="width:100%; height:auto; display:block;">
+            <defs>
+              <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f8fafc" />
+                <stop offset="100%" stop-color="#f1f5f9" />
+              </linearGradient>
+              <marker id="arrowRed" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#b91c1c" />
+              </marker>
+              <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#1d4ed8" />
+              </marker>
+              <marker id="arrowGold" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#b45309" />
+              </marker>
+            </defs>
+
+            <rect width="860" height="460" rx="14" fill="url(#bgGrad)" stroke="#cbd5e1" />
+
+            <!-- 地铁底线 -->
+            <line x1="430" y1="35" x2="430" y2="425" stroke="#fca5a5" stroke-width="6" stroke-dasharray="10,6" />
+            <text x="442" y="52" fill="#b91c1c" font-size="13" font-weight="bold">2号线（直达苏州北站 18min）</text>
+
+            <line x1="540" y1="120" x2="540" y2="425" stroke="#93c5fd" stroke-width="6" stroke-dasharray="10,6" />
+            <text x="552" y="415" fill="#1d4ed8" font-size="13" font-weight="bold">4号线中轴</text>
+
+            <line x1="60" y1="310" x2="800" y2="310" stroke="#86efac" stroke-width="6" stroke-dasharray="10,6" />
+            <text x="65" y="295" fill="#047857" font-size="13" font-weight="bold">1号线（直达木渎天平山）</text>
+
+            <!-- 动线箭头 -->
+            <path d="M 430 140 Q 290 160 270 230" fill="none" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrowBlue)" />
+            <path d="M 270 250 Q 400 285 520 285" fill="none" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrowBlue)" />
+            <path d="M 540 270 L 540 215" fill="none" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrowBlue)" />
+            <path d="M 560 200 Q 670 205 700 265" fill="none" stroke="#1d4ed8" stroke-width="3" marker-end="url(#arrowBlue)" />
+            <path d="M 690 265 Q 610 150 455 135" fill="none" stroke="#1d4ed8" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#arrowBlue)" />
+
+            <path d="M 110 310 Q 280 390 520 375" fill="none" stroke="#b45309" stroke-width="3" marker-end="url(#arrowGold)" />
+            <path d="M 540 355 L 540 155" fill="none" stroke="#b45309" stroke-width="3" marker-end="url(#arrowGold)" />
+            <path d="M 430 115 L 430 60" fill="none" stroke="#b91c1c" stroke-width="4" marker-end="url(#arrowRed)" />
+
+            <!-- 节点 -->
+            <rect x="350" y="18" width="160" height="42" rx="8" fill="#0f172a" />
+            <text x="430" y="36" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">🚄 苏州北站 (G1227)</text>
+            <text x="430" y="52" fill="#94a3b8" font-size="11.5" text-anchor="middle">周日 17:20 抵 · 18:25 发</text>
+
+            <rect x="340" y="105" width="225" height="54" rx="10" fill="#b91c1c" stroke="#fff" stroke-width="2" />
+            <text x="452" y="128" fill="#fff" font-size="14" font-weight="bold" text-anchor="middle">🏨 苏州站 &amp; 锦江之星北广场</text>
+            <text x="452" y="147" fill="#fecaca" font-size="12" text-anchor="middle">出站319m · 2/4号线大本营</text>
+
+            <rect x="315" y="185" width="148" height="44" rx="8" fill="#fff" stroke="#b91c1c" stroke-width="2" />
+            <text x="389" y="205" fill="#b91c1c" font-size="13" font-weight="bold" text-anchor="middle">🏮 七里山塘街 (2站)</text>
+            <text x="389" y="221" fill="#475569" font-size="11.5" text-anchor="middle">周五 20:00—22:00</text>
+
+            <rect x="170" y="225" width="160" height="48" rx="8" fill="#fff" stroke="#1d4ed8" stroke-width="2" />
+            <text x="250" y="246" fill="#1d4ed8" font-size="13" font-weight="bold" text-anchor="middle">🏯 城西：留园 / 艺圃</text>
+            <text x="250" y="264" fill="#475569" font-size="11.5" text-anchor="middle">周六上午 · 700m长廊</text>
+
+            <rect x="470" y="175" width="158" height="44" rx="8" fill="#fff" stroke="#1d4ed8" stroke-width="2" />
+            <text x="549" y="195" fill="#1d4ed8" font-size="13" font-weight="bold" text-anchor="middle">🏛️ 城北：丝绸博物馆</text>
+            <text x="549" y="211" fill="#475569" font-size="11.5" text-anchor="middle">周六下午 · 北寺塔站免约</text>
+
+            <rect x="460" y="268" width="172" height="46" rx="8" fill="#fff" stroke="#1d4ed8" stroke-width="2" />
+            <text x="546" y="289" fill="#0f172a" font-size="13" font-weight="bold" text-anchor="middle">🍜 城中：观前街/临顿路</text>
+            <text x="546" y="306" fill="#475569" font-size="11.5" text-anchor="middle">午餐 + 采芝斋粽子糖</text>
+
+            <rect x="650" y="255" width="182" height="54" rx="8" fill="#1e3a8a" />
+            <text x="741" y="277" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">🌌 城东：平江路水巷</text>
+            <text x="741" y="296" fill="#93c5fd" font-size="11.5" text-anchor="middle">16:45-17:25蓝调+书签+夜评弹</text>
+
+            <rect x="30" y="318" width="182" height="54" rx="8" fill="#991b1b" />
+            <text x="121" y="339" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">🍁 城西南：天平山 &amp; 木渎</text>
+            <text x="121" y="358" fill="#fde68a" font-size="11.5" text-anchor="middle">周日09:00入园湿枫+单客羊肉</text>
+
+            <rect x="448" y="350" width="190" height="50" rx="8" fill="#fff" stroke="#b45309" stroke-width="2" />
+            <text x="543" y="370" fill="#b45309" font-size="13" font-weight="bold" text-anchor="middle">🍂 道前街银杏 &amp; 书院巷</text>
+            <text x="543" y="388" fill="#475569" font-size="11.5" text-anchor="middle">拍叶 + 杜三珍酱鸭 + 茶歇</text>
+          </svg>
+        </div>
+
+        <div class="section-title" style="margin-top:16px;">🚇 手机端地铁换乘极简站序速查</div>
+        <div class="transit-cards">
+          <div class="glass-inner">
+            <div class="kpi-label"><span class="badge badge-red">周五晚山塘街往返</span></div>
+            <div class="tl-body"><strong>苏州站</strong> ➔ 2号线(桑田岛方向) <strong>2站/4分钟</strong> ➔ <strong>山塘街站</strong>（原路返回同上）</div>
+          </div>
+          <div class="glass-inner">
+            <div class="kpi-label"><span class="badge badge-blue">周六顺时针环线</span></div>
+            <div class="tl-body">苏州站 ➔ 2号线(桑田岛方向)<strong>2站直达石路(留园)</strong> ➔ 2号线至广济南路换1号线至<strong>临顿路(午餐)</strong> ➔ 1号线1站至乐桥换4号线至<strong>北寺塔(丝博)</strong> ➔ <strong>平江路</strong> ➔ 4号线1~2站回<strong>苏州站</strong></div>
+          </div>
+          <div class="glass-inner">
+            <div class="kpi-label"><span class="badge badge-gold">周日天平山 &amp; 返程闭环</span></div>
+            <div class="tl-body">苏州站 ➔ 2号线转1号线至<strong>木渎</strong>(免费红枫专线) ➔ 1号线转4号线至<strong>三元坊(道前街/书院巷)</strong> ➔ 4号线<strong>4站/8分钟</strong>回<strong>苏州站取包</strong> ➔ 2号线<strong>8站/18分钟</strong>直达<strong>苏州北站</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部同步分页栏（手机端文流直出，零 position: fixed 防微信浮窗死锁） -->
+    <div class="nav-tabs nav-tabs-bottom">
+      <label class="tab-btn" for="r-itinerary">
+        <span class="tab-icon">🗓️</span>
+        <span class="tab-long">逐小时路书</span>
+        <span class="tab-short">路书</span>
+      </label>
+      <label class="tab-btn" for="r-camera">
+        <span class="tab-icon">📷</span>
+        <span class="tab-long">Z50 II 实拍参数</span>
+        <span class="tab-short">参数</span>
+      </label>
+      <label class="tab-btn" for="r-bag">
+        <span class="tab-icon">🎒</span>
+        <span class="tab-long">蒲公英 &amp; 清单</span>
+        <span class="tab-short">背包</span>
+      </label>
+      <label class="tab-btn" for="r-budget">
+        <span class="tab-icon">💰</span>
+        <span class="tab-long">预算 &amp; 伴手礼</span>
+        <span class="tab-short">账单</span>
+      </label>
+      <label class="tab-btn" for="r-map">
+        <span class="tab-icon">🗺️</span>
+        <span class="tab-long">顺时针动线图</span>
+        <span class="tab-short">路线</span>
+      </label>
+    </div>
+
+    <div class="footer-note">
+      💡 若在微信本地文件预览中“挂为浮窗再点开”仍遇系统层卡死，请直接点右上角 <strong>⋯</strong> 选择「用系统浏览器 / Safari / Chrome 打开」（或勿挂浮窗，需要时直接从聊天/收藏点开），外置浏览器可长期保活且不丢失状态。
+    </div>
+  </div>
+  </div>
+
+  <script>
+    window.onerror = function () { return true; };
+    (function () {
+      var TOTAL_CHECKS = 7;
+      var STATE_KEY = 'suzhou_state_2026';
+      var isHttp = (location.protocol === 'http:' || location.protocol === 'https:');
+
+      function getCheckedId(name, fallback) {
+        var list = document.querySelectorAll('input[name="' + name + '"]');
+        for (var i = 0; i < list.length; i++) {
+          if (list[i].checked) return list[i].id;
+        }
+        return fallback;
+      }
+
+      function saveState() {
+        if (!isHttp) return;
+        var ck = [];
+        for (var i = 0; i < TOTAL_CHECKS; i++) {
+          var cb = document.getElementById('ck-' + i);
+          ck.push(cb && cb.checked ? 1 : 0);
+        }
+        var chkHero = document.getElementById('chk-hero');
+        var raw = JSON.stringify({
+          th: getCheckedId('theme', 'th-maple'),
+          tab: getCheckedId('main-tab', 'r-itinerary'),
+          day: getCheckedId('day-tab', 'r-day-all'),
+          cam: getCheckedId('cam-tab', 'r-cam-0'),
+          hero: chkHero && chkHero.checked ? 1 : 0,
+          ck: ck.join('')
+        });
+        try { localStorage.setItem(STATE_KEY, raw); } catch (e) {}
+      }
+
+      function loadState() {
+        if (!isHttp) return null;
+        try {
+          var raw = localStorage.getItem(STATE_KEY);
+          if (raw) {
+            var st = JSON.parse(raw);
+            if (st && st.tab) return st;
+          }
+        } catch (e) {}
+        return null;
+      }
+
+      function updateCheckProgress() {
+        var doneCount = 0;
+        for (var i = 0; i < TOTAL_CHECKS; i++) {
+          var cb = document.getElementById('ck-' + i);
+          if (cb && cb.checked) doneCount++;
+        }
+        var pct = Math.round((doneCount / TOTAL_CHECKS) * 100);
+        var bar = document.getElementById('checkProgressBar');
+        var txt = document.getElementById('checkProgressText');
+        if (bar) bar.style.width = pct + '%';
+        if (txt) txt.textContent = doneCount + ' / ' + TOTAL_CHECKS + ' (' + pct + '%)';
+      }
+
+      function applyState(st) {
+        if (!st) return;
+        var radioIds = [st.th, st.tab, st.day, st.cam];
+        for (var i = 0; i < radioIds.length; i++) {
+          if (radioIds[i]) {
+            var r = document.getElementById(radioIds[i]);
+            if (r) r.checked = true;
+          }
+        }
+        var chkHero = document.getElementById('chk-hero');
+        if (chkHero) chkHero.checked = !!st.hero;
+        if (typeof st.ck === 'string') {
+          for (var j = 0; j < TOTAL_CHECKS; j++) {
+            var cb = document.getElementById('ck-' + j);
+            if (cb) cb.checked = st.ck.charAt(j) === '1';
+          }
+        }
+        updateCheckProgress();
+      }
+
+      function flashBtn(btn, msg) {
+        var orig = btn.getAttribute('data-orig') || btn.textContent;
+        btn.setAttribute('data-orig', orig);
+        btn.textContent = msg;
+        setTimeout(function () { btn.textContent = orig; }, 1500);
+      }
+
+      function fallbackCopy(txt, btn) {
+        var ta = document.createElement('textarea');
+        ta.value = txt;
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          flashBtn(btn, '已复制 ✓');
+        } catch (e) {
+          flashBtn(btn, '请长按复制');
+        }
+        document.body.removeChild(ta);
+      }
+
+      function copyText(txt, btn) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(function () {
+            flashBtn(btn, '已复制 ✓');
+          }, function () {
+            fallbackCopy(txt, btn);
+          });
+        } else {
+          fallbackCopy(txt, btn);
+        }
+      }
+
+      function init() {
+        var restored = loadState();
+        if (restored) {
+          applyState(restored);
+        } else {
+          updateCheckProgress();
+        }
+
+        var allInputs = document.querySelectorAll('.sr-input');
+        for (var i = 0; i < allInputs.length; i++) {
+          allInputs[i].addEventListener('change', function () {
+            if (this.name === 'main-tab' && window.innerWidth <= 768) {
+              var chkHero = document.getElementById('chk-hero');
+              if (chkHero && this.id !== 'r-itinerary') chkHero.checked = true;
+              if (isHttp) window.scrollTo(0, 0);
+            }
+            if (this.classList && this.classList.contains('ck-input')) {
+              updateCheckProgress();
+            }
+            saveState();
+          });
+        }
+
+        var copyBtns = document.querySelectorAll('.copy-btn[data-copy]');
+        for (var c = 0; c < copyBtns.length; c++) {
+          (function (btn) {
+            btn.addEventListener('click', function () {
+              copyText(btn.getAttribute('data-copy'), btn);
+            });
+          })(copyBtns[c]);
+        }
+
+        document.documentElement.classList.add('js-enabled');
+      }
+
+      init();
+    })();
+  </script>
+</body>
+</html>
